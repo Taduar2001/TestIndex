@@ -35,9 +35,14 @@
                 cursor: pointer;
             }
 
-        spline-viewer {
+        #viewer-container {
             flex: 1;
             width: 100%;
+        }
+
+        spline-viewer {
+            width: 100%;
+            height: 100%;
             display: block;
         }
     </style>
@@ -50,18 +55,30 @@
         <button onclick="loadScene()">Загрузить</button>
     </div>
 
-    <spline-viewer id="viewer" url="https://prod.spline.design/LMPYwcgw6HP6TwHP/scene.splinecode"></spline-viewer>
+    <div id="viewer-container">
+        <spline-viewer id="viewer" url="https://prod.spline.design/LMPYwcgw6HP6TwHP/scene.splinecode"></spline-viewer>
+    </div>
 
     <script>
         function loadScene() {
             const input = document.getElementById('splineUrl');
-            const viewer = document.getElementById('viewer');
+            const container = document.getElementById('viewer-container');
             const url = input.value.trim();
-            if (url && url.startsWith('https://')) {
-                viewer.setAttribute('url', url);
-            } else {
-                alert('Пожалуйста, введите корректную ссылку на Spline сцену.');
+
+            if (!url || !url.startsWith('https://prod.spline.design/') || !url.endsWith('.splinecode')) {
+                alert('Пожалуйста, введите корректную ссылку на сцену Spline (https://prod.spline.design/.../scene.splinecode)');
+                return;
             }
+
+            // Удалить старый viewer, если есть
+            const oldViewer = document.getElementById('viewer');
+            if (oldViewer) oldViewer.remove();
+
+            // Создать новый
+            const newViewer = document.createElement('spline-viewer');
+            newViewer.id = 'viewer';
+            newViewer.setAttribute('url', url);
+            container.appendChild(newViewer);
         }
     </script>
 </body>
