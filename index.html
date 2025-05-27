@@ -13,8 +13,14 @@
             overflow: hidden;
         }
 
-        spline-viewer {
+        .viewer-container {
+            display: flex;
+            height: 100%;
             width: 100%;
+        }
+
+        spline-viewer {
+            flex: 1;
             height: 100%;
             display: block;
         }
@@ -22,6 +28,10 @@
 </head>
 <body>
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.96/build/spline-viewer.js"></script>
-    <spline-viewer url="https://prod.spline.design/LMPYwcgw6HP6TwHP/scene.splinecode"></spline-viewer>
+
+    <div class="viewer-container">
+        <spline-viewer url="https://prod.spline.design/LMPYwcgw6HP6TwHP/scene.splinecode"></spline-viewer>
+        <spline-viewer url="https://prod.spline.design/khGTPVK8322Vi7Rs/scene.splinecode"></spline-viewer>
+    </div>
 </body>
 </html>
