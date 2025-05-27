@@ -3,26 +3,41 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spline Viewer</title>
+    <title>Interactive Spline Viewer</title>
     <style>
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
-            overflow: hidden;
-        }
-
-        .viewer-container {
             display: flex;
             flex-direction: column;
-            height: 100%;
-            width: 100%;
+            font-family: sans-serif;
         }
+
+        .controls {
+            padding: 10px;
+            background: #f0f0f0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+            .controls input {
+                flex: 1;
+                padding: 8px;
+                font-size: 16px;
+            }
+
+            .controls button {
+                padding: 8px 12px;
+                font-size: 16px;
+                cursor: pointer;
+            }
 
         spline-viewer {
             flex: 1;
-            height: 100%;
+            width: 100%;
             display: block;
         }
     </style>
@@ -30,9 +45,24 @@
 <body>
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.96/build/spline-viewer.js"></script>
 
-    <div class="viewer-container">
-        <spline-viewer url="https://prod.spline.design/LMPYwcgw6HP6TwHP/scene.splinecode"></spline-viewer>
-        <spline-viewer url="https://prod.spline.design/khGTPVK8322Vi7Rs/scene.splinecode"></spline-viewer>
+    <div class="controls">
+        <input id="splineUrl" type="text" placeholder="Вставь ссылку на сцену Spline (https://prod.spline.design/...)" />
+        <button onclick="loadScene()">Загрузить</button>
     </div>
+
+    <spline-viewer id="viewer" url="https://prod.spline.design/LMPYwcgw6HP6TwHP/scene.splinecode"></spline-viewer>
+
+    <script>
+        function loadScene() {
+            const input = document.getElementById('splineUrl');
+            const viewer = document.getElementById('viewer');
+            const url = input.value.trim();
+            if (url && url.startsWith('https://')) {
+                viewer.setAttribute('url', url);
+            } else {
+                alert('Пожалуйста, введите корректную ссылку на Spline сцену.');
+            }
+        }
+    </script>
 </body>
 </html>
