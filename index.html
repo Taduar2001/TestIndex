@@ -1,85 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interactive Spline Viewer</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            font-family: sans-serif;
-        }
-
-        .controls {
-            padding: 10px;
-            background: #f0f0f0;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-            .controls input {
-                flex: 1;
-                padding: 8px;
-                font-size: 16px;
-            }
-
-            .controls button {
-                padding: 8px 12px;
-                font-size: 16px;
-                cursor: pointer;
-            }
-
-        #viewer-container {
-            flex: 1;
-            width: 100%;
-        }
-
-        spline-viewer {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-    </style>
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover' />
+    <meta charset='utf-8'>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <style></style>
+    <title>TestRequest</title>
+    <script src="playcanvas-stable.min.js"></script>
+    <script src="__settings__.js"></script>
 </head>
 <body>
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.96/build/spline-viewer.js"></script>
-
-    <div class="controls">
-        <input id="splineUrl" type="text" placeholder="Вставь ссылку на сцену Spline (https://prod.spline.design/...)" />
-        <button onclick="loadScene()">Загрузить</button>
-    </div>
-
-    <div id="viewer-container">
-        <spline-viewer id="viewer" url="https://prod.spline.design/LMPYwcgw6HP6TwHP/scene.splinecode"></spline-viewer>
-    </div>
-
-    <script>
-        function loadScene() {
-            const input = document.getElementById('splineUrl');
-            const container = document.getElementById('viewer-container');
-            const url = input.value.trim();
-
-            if (!url || !url.startsWith('https://prod.spline.design/') || !url.endsWith('.splinecode')) {
-                alert('Пожалуйста, введите корректную ссылку на сцену Spline (https://prod.spline.design/.../scene.splinecode)');
-                return;
-            }
-
-            // Удалить старый viewer, если есть
-            const oldViewer = document.getElementById('viewer');
-            if (oldViewer) oldViewer.remove();
-
-            // Создать новый
-            const newViewer = document.createElement('spline-viewer');
-            newViewer.id = 'viewer';
-            newViewer.setAttribute('url', url);
-            container.appendChild(newViewer);
-        }
-    </script>
+    <script src="__start__.js"></script>
+    <script src="__loading__.js"></script>
 </body>
 </html>
